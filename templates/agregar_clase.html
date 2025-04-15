@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Agregar Tutor{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <h1 class="text-center mb-4">NAEX - Gestión de Clases</h1>
+
+        <!-- Sección de registro de clases -->
+        <div class="card mb-4">
+            <div class="card-header">Registrar Clase</div>
+            <div class="card-body">
+                <form action="/registrar_clase" method="post">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="estudiante_id" class="form-label">Estudiante</label>
+                            <select class="form-select" name="estudiante_id" required>
+                                {% for estudiante in estudiantes %}
+                                    <option value="{{ estudiante['_id'] }}">{{ estudiante['nombre'] }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col">
+                            <label for="tutor_id" class="form-label">Tutor</label>
+                            <select class="form-select" name="tutor_id" required>
+                                {% for tutor in tutores %}
+                                    <option value="{{ tutor['_id'] }}">{{ tutor['nombre'] }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fecha" class="form-label">Fecha de la clase</label>
+                        <input type="date" class="form-control" name="fecha" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Registrar</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Listado de estudiantes -->
+        <div class="card mb-4">
+            <div class="card-header">Estudiantes</div>
+            <div class="card-body">
+                <ul class="list-group">
+                    {% for estudiante in estudiantes %}
+                        <li class="list-group-item">
+                            {{ estudiante['nombre'] }} - Clases compradas: {{ estudiante['clases_compradas'] }}, Clases consumidas: {{ estudiante['clases_consumidas'] }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
