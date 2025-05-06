@@ -30,7 +30,7 @@ def registrar_estudiante():
         nombre = request.form['nombre']
         documento = request.form['documento']
         correo = request.form['correo']
-        clases = int(request.form['clases'])
+        clases = int(request.form['clases_compradas'])
         agregar_estudiante(nombre, clases, documento, correo)
         return redirect(url_for('index'))
     return render_template('agregar_estudiante.html')
